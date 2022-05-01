@@ -135,7 +135,11 @@ namespace PicListViewer
         /// <param name="e"></param>
         private void PicListViewer_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if(e.KeyCode == Keys.F4)
+            {
+                this.mParentForm.Show();
+                this.Dispose();
+            }
         }
 
         #endregion

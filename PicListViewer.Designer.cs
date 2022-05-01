@@ -76,12 +76,14 @@ namespace PicListViewer
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "PicListViewer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "图集浏览器";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PicListViewer_FormClosed);
             this.Load += new System.EventHandler(this.PicListViewer_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PicListViewer_KeyDown);
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.PicListViewer_MouseWheel);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

@@ -122,7 +122,7 @@ namespace PicListViewer
             0});
             this.numPicWidth.Name = "numPicWidth";
             this.numPicWidth.Size = new System.Drawing.Size(339, 21);
-            this.numPicWidth.TabIndex = 4;
+            this.numPicWidth.TabIndex = 2;
             // 
             // numPicHeight
             // 
@@ -140,7 +140,7 @@ namespace PicListViewer
             0});
             this.numPicHeight.Name = "numPicHeight";
             this.numPicHeight.Size = new System.Drawing.Size(339, 21);
-            this.numPicHeight.TabIndex = 4;
+            this.numPicHeight.TabIndex = 3;
             // 
             // numInterval
             // 
@@ -203,7 +203,7 @@ namespace PicListViewer
             this.btnStart.Location = new System.Drawing.Point(350, 261);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(95, 23);
-            this.btnStart.TabIndex = 7;
+            this.btnStart.TabIndex = 9;
             this.btnStart.Text = "开始图片浏览";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
@@ -214,7 +214,7 @@ namespace PicListViewer
             this.btnCancel.Location = new System.Drawing.Point(269, 261);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 8;
+            this.btnCancel.TabIndex = 10;
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -225,7 +225,7 @@ namespace PicListViewer
             this.chkTopMost.Location = new System.Drawing.Point(106, 212);
             this.chkTopMost.Name = "chkTopMost";
             this.chkTopMost.Size = new System.Drawing.Size(132, 16);
-            this.chkTopMost.TabIndex = 9;
+            this.chkTopMost.TabIndex = 7;
             this.chkTopMost.Text = "始终显示于桌面顶层";
             this.chkTopMost.UseVisualStyleBackColor = true;
             // 
@@ -237,7 +237,7 @@ namespace PicListViewer
             this.chkIsToSave.Location = new System.Drawing.Point(244, 212);
             this.chkIsToSave.Name = "chkIsToSave";
             this.chkIsToSave.Size = new System.Drawing.Size(96, 16);
-            this.chkIsToSave.TabIndex = 9;
+            this.chkIsToSave.TabIndex = 8;
             this.chkIsToSave.Text = "保存当前设置";
             this.chkIsToSave.UseVisualStyleBackColor = true;
             // 
