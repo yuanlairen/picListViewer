@@ -113,7 +113,14 @@ namespace PicListViewer
                 mCurrIndex = 0;
             }
 
-            this.pictureBox1.Image = Image.FromFile(mImageNameList[mCurrIndex]);
+            try
+            {
+                this.pictureBox1.Image = Image.FromFile(mImageNameList[mCurrIndex]);
+            }
+            catch
+            {
+            }
+            
             mCurrIndex += 1;
 
             //重新根据外部设置修改定时器间隔
@@ -139,6 +146,17 @@ namespace PicListViewer
             {
                 this.mParentForm.Show();
                 this.Dispose();
+            }
+            else if(e.KeyCode == Keys.F11)
+            {
+                if (this.WindowState == FormWindowState.Maximized)
+                {
+                    this.WindowState = FormWindowState.Normal;
+                }
+                else
+                {
+                    this.WindowState = FormWindowState.Maximized;
+                }
             }
         }
 
