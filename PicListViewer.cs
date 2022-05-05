@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -94,7 +95,13 @@ namespace PicListViewer
         {
             try
             {
-                mImageNameList = System.IO.Directory.GetFiles(mImagePath).ToArray();
+                var query = (from f in System.IO.Directory.GetFiles(mImagePath)
+                             let fi = new FileInfo(f)
+                             orderby fi.CreationTime ascending
+                             select fi.FullName);
+
+                this.mImageNameList = query.ToArray();
+
                 this.timer1.Start();
             }
             catch (Exception ex)
