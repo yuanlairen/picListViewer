@@ -33,7 +33,7 @@ namespace PicListViewer
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PicListViewer));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.lblSuspend = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,25 +54,25 @@ namespace PicListViewer
             this.timer1.Interval = 300;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnCancel
+            // lblSuspend
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(-100, -100);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "button1";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.lblSuspend.AutoSize = true;
+            this.lblSuspend.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblSuspend.ForeColor = System.Drawing.Color.Red;
+            this.lblSuspend.Location = new System.Drawing.Point(319, 0);
+            this.lblSuspend.Name = "lblSuspend";
+            this.lblSuspend.Size = new System.Drawing.Size(41, 12);
+            this.lblSuspend.TabIndex = 2;
+            this.lblSuspend.Text = "已暂停";
+            this.lblSuspend.Visible = false;
             // 
             // PicListViewer
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(360, 240);
-            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.lblSuspend);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -87,6 +87,7 @@ namespace PicListViewer
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.PicListViewer_MouseWheel);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -94,7 +95,7 @@ namespace PicListViewer
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label lblSuspend;
     }
 }
 

@@ -94,7 +94,7 @@ namespace PicListViewer
         {
             try
             {
-                mImageNameList = System.IO.Directory.GetFiles(mImagePath);
+                mImageNameList = System.IO.Directory.GetFiles(mImagePath).ToArray();
                 this.timer1.Start();
             }
             catch (Exception ex)
@@ -131,6 +131,7 @@ namespace PicListViewer
                 this.timer1.Start();
             }
         }
+
         #endregion
 
         #region 窗体键盘事件
@@ -157,6 +158,23 @@ namespace PicListViewer
                 {
                     this.WindowState = FormWindowState.Maximized;
                 }
+            }
+            else if (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter)
+            {
+                if (this.timer1.Enabled)
+                {
+                    this.timer1.Stop();
+                    this.lblSuspend.Visible = true;
+                }
+                else
+                {
+                    this.timer1.Start();
+                    this.lblSuspend.Visible = false;
+                }
+            }
+            else if(e.KeyCode == Keys.Escape)
+            {
+                this.Close();
             }
         }
 
@@ -243,11 +261,6 @@ namespace PicListViewer
         {
             this.ResetPicList();
             this.StartViewer();
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void PicListViewer_FormClosed(object sender, FormClosedEventArgs e)
