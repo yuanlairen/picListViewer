@@ -17,6 +17,7 @@ namespace PicListViewer
         int mCurrIndex = 0;
         string mImagePath = null;
         int mInterval = 0;
+        SortCondType mSortBy = SortCondType.ByTimeAsc;
 
         PicParamEdit mParentForm = null;
 
@@ -27,6 +28,7 @@ namespace PicListViewer
             this.TopMost = settingConfig.TopMost;
             this.mImagePath = settingConfig.ImgPath;
             this.mInterval = settingConfig.TimerInterval * 1000;
+            this.mSortBy = settingConfig.SortBy;
             this.ExInitializeComponent(settingConfig.FormWidth,settingConfig.FormHeight,settingConfig.FormOpacity);
 
             this.mParentForm = parentForm;
@@ -95,12 +97,42 @@ namespace PicListViewer
         {
             try
             {
-                var query = (from f in System.IO.Directory.GetFiles(mImagePath)
-                             let fi = new FileInfo(f)
-                             orderby fi.CreationTime ascending
-                             select fi.FullName);
+                if (this.mSortBy == SortCondType.ByTimeAsc)
+                {
+                    var query = (from f in System.IO.Directory.GetFiles(mImagePath)
+                                 let fi = new FileInfo(f)
+                                 orderby fi.CreationTime ascending
+                                 select fi.FullName);
 
-                this.mImageNameList = query.ToArray();
+                    this.mImageNameList = query.ToArray();
+                }
+                else if (this.mSortBy == SortCondType.ByTimeDesc)
+                {
+                    var query = (from f in System.IO.Directory.GetFiles(mImagePath)
+                                 let fi = new FileInfo(f)
+                                 orderby fi.CreationTime descending
+                                 select fi.FullName);
+
+                    this.mImageNameList = query.ToArray();
+                }
+                else if (this.mSortBy == SortCondType.ByNameAsc)
+                {
+                    var query = (from f in System.IO.Directory.GetFiles(mImagePath)
+                                 let fi = new FileInfo(f)
+                                 orderby fi.Name ascending
+                                 select fi.FullName);
+
+                    this.mImageNameList = query.ToArray();
+                }
+                else if (this.mSortBy == SortCondType.ByNameAsc)
+                {
+                    var query = (from f in System.IO.Directory.GetFiles(mImagePath)
+                                 let fi = new FileInfo(f)
+                                 orderby fi.Name descending
+                                 select fi.FullName);
+
+                    this.mImageNameList = query.ToArray();
+                }
 
                 this.timer1.Start();
             }
@@ -123,6 +155,7 @@ namespace PicListViewer
             try
             {
                 this.pictureBox1.Image = Image.FromFile(mImageNameList[mCurrIndex]);
+                this.pictureBox1.Tag = mCurrIndex;
             }
             catch
             {
@@ -178,6 +211,32 @@ namespace PicListViewer
                     this.timer1.Start();
                     this.lblSuspend.Visible = false;
                 }
+            }
+            else if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
+            {
+                if(this.timer1.Enabled)
+                {
+                    this.timer1.Stop();
+                    this.lblSuspend.Visible = true;
+                }
+                if(e.KeyCode == Keys.Left)
+                {
+                    mCurrIndex = ((int)this.pictureBox1.Tag) - 1;
+                    if(mCurrIndex<0)
+                    {
+                        mCurrIndex = 0;
+                    }
+                }
+                else
+                {
+                    mCurrIndex = ((int)this.pictureBox1.Tag) + 1;
+                    if (mCurrIndex >= this.mImageNameList.Count())
+                    {
+                        mCurrIndex = this.mImageNameList.Count() - 1;
+                    }
+                }
+                this.pictureBox1.Image = Image.FromFile(mImageNameList[mCurrIndex]);
+                this.pictureBox1.Tag = mCurrIndex;
             }
             else if(e.KeyCode == Keys.Escape)
             {

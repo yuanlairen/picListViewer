@@ -19,6 +19,10 @@ namespace PicListViewer
 
         private void PicParamEdit_Load(object sender, EventArgs e)
         {
+            this.cboSortBy.DataSource = UtilHelper.GetEnumDic<SortCondType>().ToArray();
+            this.cboSortBy.DisplayMember = "Value";
+            this.cboSortBy.ValueMember = "Key";
+
             var setting = SettingHelper.GetSettingConfig();
             this.numInterval.Value = setting.TimerInterval;
             this.numOpacity.Value = setting.FormOpacity;
@@ -26,6 +30,7 @@ namespace PicListViewer
             this.numPicHeight.Value = setting.FormHeight;
             this.txtPicPath.Text = setting.ImgPath;
             this.chkTopMost.Checked = setting.TopMost;
+            this.cboSortBy.SelectedValue = setting.SortBy;
         }
 
         private void btnSelectPic_Click(object sender, EventArgs e)
@@ -56,8 +61,9 @@ namespace PicListViewer
                 setting.FormOpacity = int.Parse(decimal.Floor(this.numOpacity.Value).ToString());
                 setting.TimerInterval = int.Parse(decimal.Floor(this.numInterval.Value).ToString());
                 setting.ImgPath = this.txtPicPath.Text;
-
                 setting.TopMost = this.chkTopMost.Checked;
+                setting.SortBy = (SortCondType)this.cboSortBy.SelectedValue;
+
                 var child = new PicListViewer(setting, this);
                 child.Show();
 

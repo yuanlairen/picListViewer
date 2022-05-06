@@ -46,6 +46,11 @@ namespace PicListViewer
         {
             get; set;
         } = false;
+
+        public SortCondType SortBy
+        {
+            get; set;
+        } = SortCondType.ByTimeAsc;
     }
 
     /// <summary>

@@ -46,6 +46,8 @@ namespace PicListViewer
             this.btnCancel = new System.Windows.Forms.Button();
             this.chkTopMost = new System.Windows.Forms.CheckBox();
             this.chkIsToSave = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cboSortBy = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numOpacity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPicWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPicHeight)).BeginInit();
@@ -200,7 +202,7 @@ namespace PicListViewer
             // btnStart
             // 
             this.btnStart.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnStart.Location = new System.Drawing.Point(350, 261);
+            this.btnStart.Location = new System.Drawing.Point(350, 300);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(95, 23);
             this.btnStart.TabIndex = 9;
@@ -211,7 +213,7 @@ namespace PicListViewer
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(269, 261);
+            this.btnCancel.Location = new System.Drawing.Point(269, 300);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 10;
@@ -222,7 +224,7 @@ namespace PicListViewer
             // chkTopMost
             // 
             this.chkTopMost.AutoSize = true;
-            this.chkTopMost.Location = new System.Drawing.Point(106, 212);
+            this.chkTopMost.Location = new System.Drawing.Point(110, 262);
             this.chkTopMost.Name = "chkTopMost";
             this.chkTopMost.Size = new System.Drawing.Size(132, 16);
             this.chkTopMost.TabIndex = 7;
@@ -234,12 +236,34 @@ namespace PicListViewer
             this.chkIsToSave.AutoSize = true;
             this.chkIsToSave.Checked = true;
             this.chkIsToSave.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkIsToSave.Location = new System.Drawing.Point(244, 212);
+            this.chkIsToSave.Location = new System.Drawing.Point(248, 262);
             this.chkIsToSave.Name = "chkIsToSave";
             this.chkIsToSave.Size = new System.Drawing.Size(96, 16);
             this.chkIsToSave.TabIndex = 8;
             this.chkIsToSave.Text = "保存当前设置";
             this.chkIsToSave.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(30, 215);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 12);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "排序方式";
+            // 
+            // cboSortBy
+            // 
+            this.cboSortBy.FormattingEnabled = true;
+            this.cboSortBy.Items.AddRange(new object[] {
+            "按时间顺序",
+            "按时间倒序",
+            "按文件名顺序",
+            "按文件名倒序"});
+            this.cboSortBy.Location = new System.Drawing.Point(106, 215);
+            this.cboSortBy.Name = "cboSortBy";
+            this.cboSortBy.Size = new System.Drawing.Size(339, 20);
+            this.cboSortBy.TabIndex = 12;
             // 
             // PicParamEdit
             // 
@@ -247,7 +271,9 @@ namespace PicListViewer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(480, 300);
+            this.ClientSize = new System.Drawing.Size(480, 335);
+            this.Controls.Add(this.cboSortBy);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.chkIsToSave);
             this.Controls.Add(this.chkTopMost);
             this.Controls.Add(this.btnCancel);
@@ -298,5 +324,7 @@ namespace PicListViewer
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.CheckBox chkTopMost;
         private System.Windows.Forms.CheckBox chkIsToSave;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cboSortBy;
     }
 }

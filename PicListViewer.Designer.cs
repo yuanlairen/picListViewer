@@ -59,11 +59,11 @@ namespace PicListViewer
             this.lblSuspend.AutoSize = true;
             this.lblSuspend.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblSuspend.ForeColor = System.Drawing.Color.Red;
-            this.lblSuspend.Location = new System.Drawing.Point(319, 0);
+            this.lblSuspend.Location = new System.Drawing.Point(271, 0);
             this.lblSuspend.Name = "lblSuspend";
-            this.lblSuspend.Size = new System.Drawing.Size(41, 12);
+            this.lblSuspend.Size = new System.Drawing.Size(89, 12);
             this.lblSuspend.TabIndex = 2;
-            this.lblSuspend.Text = "已暂停";
+            this.lblSuspend.Text = "已暂停自动播放";
             this.lblSuspend.Visible = false;
             // 
             // PicListViewer

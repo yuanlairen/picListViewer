@@ -53,6 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UtilHelper.cs" />
+    <Compile Include="Enum.cs" />
     <Compile Include="ConfigHelper.cs" />
     <Compile Include="SettingHelper.cs" />
     <Compile Include="PicListViewer.cs">
