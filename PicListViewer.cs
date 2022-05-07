@@ -13,7 +13,7 @@ namespace PicListViewer
 {
     public partial class PicListViewer : Form
     {
-        string[] mImageNameList = null;
+        Image[] mImageObjs = null;
         int mCurrIndex = 0;
         string mImagePath = null;
         int mInterval = 0;
@@ -81,7 +81,7 @@ namespace PicListViewer
         {
             try
             {
-                mImageNameList = new List<string>().ToArray();
+                mImageObjs = new List<Image>().ToArray();
                 this.pictureBox1.Image = null;
             }
             catch (Exception ex)
@@ -97,6 +97,8 @@ namespace PicListViewer
         {
             try
             {
+                string[] imageNameList = null;
+
                 if (this.mSortBy == SortCondType.ByTimeAsc)
                 {
                     var query = (from f in System.IO.Directory.GetFiles(mImagePath)
@@ -104,7 +106,7 @@ namespace PicListViewer
                                  orderby fi.CreationTime ascending
                                  select fi.FullName);
 
-                    this.mImageNameList = query.ToArray();
+                    imageNameList = query.ToArray();
                 }
                 else if (this.mSortBy == SortCondType.ByTimeDesc)
                 {
@@ -113,7 +115,7 @@ namespace PicListViewer
                                  orderby fi.CreationTime descending
                                  select fi.FullName);
 
-                    this.mImageNameList = query.ToArray();
+                    imageNameList = query.ToArray();
                 }
                 else if (this.mSortBy == SortCondType.ByNameAsc)
                 {
@@ -122,7 +124,7 @@ namespace PicListViewer
                                  orderby fi.Name ascending
                                  select fi.FullName);
 
-                    this.mImageNameList = query.ToArray();
+                    imageNameList = query.ToArray();
                 }
                 else if (this.mSortBy == SortCondType.ByNameAsc)
                 {
@@ -131,8 +133,19 @@ namespace PicListViewer
                                  orderby fi.Name descending
                                  select fi.FullName);
 
-                    this.mImageNameList = query.ToArray();
+                    imageNameList = query.ToArray();
                 }
+
+                mImageObjs = imageNameList.Select(t => {
+                    try
+                    {
+                        return Image.FromFile(t);
+                    }
+                    catch
+                    {
+                        return null;
+                    }
+                }).Where(t=>t!=null).ToArray();
 
                 this.timer1.Start();
             }
@@ -146,21 +159,15 @@ namespace PicListViewer
         #region 定时器事件
         private void timer1_Tick(object sender, EventArgs e)
         {
-            int maxIndex = mImageNameList.Length - 1;
+            int maxIndex = mImageObjs.Length - 1;
             if (mCurrIndex > maxIndex)
             {
                 mCurrIndex = 0;
             }
 
-            try
-            {
-                this.pictureBox1.Image = Image.FromFile(mImageNameList[mCurrIndex]);
-                this.pictureBox1.Tag = mCurrIndex;
-            }
-            catch
-            {
-            }
-            
+            this.pictureBox1.Image = mImageObjs[mCurrIndex];
+            this.pictureBox1.Tag = mCurrIndex;
+
             mCurrIndex += 1;
 
             //重新根据外部设置修改定时器间隔
@@ -212,14 +219,14 @@ namespace PicListViewer
                     this.lblSuspend.Visible = false;
                 }
             }
-            else if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
+            else if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Up || e.KeyCode == Keys.Right || e.KeyCode == Keys.Down)
             {
                 if(this.timer1.Enabled)
                 {
                     this.timer1.Stop();
                     this.lblSuspend.Visible = true;
                 }
-                if(e.KeyCode == Keys.Left)
+                if(e.KeyCode == Keys.Left || e.KeyCode == Keys.Up)
                 {
                     mCurrIndex = ((int)this.pictureBox1.Tag) - 1;
                     if(mCurrIndex<0)
@@ -227,15 +234,15 @@ namespace PicListViewer
                         mCurrIndex = 0;
                     }
                 }
-                else
+                else if(e.KeyCode == Keys.Right || e.KeyCode == Keys.Down)
                 {
                     mCurrIndex = ((int)this.pictureBox1.Tag) + 1;
-                    if (mCurrIndex >= this.mImageNameList.Count())
+                    if (mCurrIndex >= this.mImageObjs.Count())
                     {
-                        mCurrIndex = this.mImageNameList.Count() - 1;
+                        mCurrIndex = this.mImageObjs.Count() - 1;
                     }
                 }
-                this.pictureBox1.Image = Image.FromFile(mImageNameList[mCurrIndex]);
+                this.pictureBox1.Image = mImageObjs[mCurrIndex];
                 this.pictureBox1.Tag = mCurrIndex;
             }
             else if(e.KeyCode == Keys.Escape)
